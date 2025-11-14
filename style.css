@@ -299,3 +299,10 @@ html, body {
         background-position: center;
     }
 }
+
+code {
+  background-color: rgb(80, 80, 80);
+  color: white;
+  padding: 3px 3px;
+  border-radius: 10px;
+}
