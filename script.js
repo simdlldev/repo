@@ -177,7 +177,7 @@ async function decryptData(projectName, privateKey) {
     loginButton.textContent = uiTexts.login_button_loading || 'Decrypting...';
 
     try {
-        const encryptedDataUrl = `/repo/${projectName}.bin`;
+        const encryptedDataUrl = `${projectName}.bin`;
         const resp = await fetch(encryptedDataUrl, { cache: "no-cache" });
         if (!resp.ok) {
             if (resp.status === 404) {
