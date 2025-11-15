@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'RoundedRegular';
-    src: url('rounded_regular.ttf') format('truetype');
+    src: url('rounded_regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }

@@ -113,6 +113,19 @@ function base64ToArrayBuffer(base64) {
 }
 
 /**
+ * Genera l'hash SHA1 di una stringa usando Web Crypto API.
+ * @param {string} inputString - La stringa da hashare.
+ * @returns {Promise<string>} L'hash SHA1 della stringa.
+ */
+async function createSHA1Hash(inputString) {
+    const msgUint8 = new TextEncoder().encode(inputString); // encode as (utf-8) Uint8Array
+    const hashBuffer = await crypto.subtle.digest('SHA-1', msgUint8); // hash the message
+    const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
+    return hashHex;
+}
+
+/**
  * Crea la card HTML per un progetto.
  * @param {Object} project
  * @param {boolean} isPrivate - Indica se la card è per un progetto privato.
@@ -177,7 +190,8 @@ async function decryptData(projectName, privateKey) {
     loginButton.textContent = uiTexts.login_button_loading || 'Decrypting...';
 
     try {
-        const encryptedDataUrl = `${projectName}.bin`;
+        const projectHash = await createSHA1Hash(projectName);
+        const encryptedDataUrl = `${projectHash}.bin`;
         const resp = await fetch(encryptedDataUrl, { cache: "no-cache" });
         if (!resp.ok) {
             if (resp.status === 404) {

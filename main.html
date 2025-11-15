@@ -3,10 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Software - simdlldev</title>
+    <title>Portfolio Software – simdlldev</title>
+    <script>
+(function(){
+  const avatarUrl = 'https://avatars.githubusercontent.com/simdlldev?s=400';
+  const size = 128; // dimensione del favicon risultante (px)
+  function setFavicon(dataUrl){
+    let link = document.querySelector("link[rel~='icon']");
+    if(!link){
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.href = dataUrl;
+    link.type = 'image/png';
+    link.sizes = `${size}x${size}`;
+  }
+
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+
+    // Calcola crop centrale quadrato dell'immagine originale
+    const minDim = Math.min(img.width, img.height);
+    const sx = (img.width - minDim) / 2;
+    const sy = (img.height - minDim) / 2;
+
+    // Applica mask circolare e disegna l'immagine ritagliata e ridimensionata
+    ctx.clearRect(0, 0, size, size);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+    ctx.restore();
+
+    const dataUrl = canvas.toDataURL('image/png');
+    setFavicon(dataUrl);
+  };
+
+  img.onerror = () => {
+    // Fallback: usa direttamente l'URL originale se il caricamento canvas fallisce
+    setFavicon(avatarUrl);
+  };
+
+  img.src = avatarUrl;
+})();
+</script>
     <!-- Caricamento di Google Fonts e icone -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" as="style" type="text/css" crossorigin="anonymous">
     <!-- Caricamento di Tailwind CSS e file di stile locale -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
