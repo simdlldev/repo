@@ -311,8 +311,8 @@ code {
 #back-to-top {
     z-index: 40;
     transform: translateY(100px); /* Inizia fuori schermo */
-    width: 64px; /* Larghezza esplicita per renderlo quadrato */
-    height: 64px; /* Altezza esplicita per renderlo quadrato */
+    width: 55px; /* Larghezza esplicita per renderlo quadrato */
+    height: 55px; /* Altezza esplicita per renderlo quadrato */
     display: flex; /* Usa flexbox per centrare l'icona */
     align-items: center; /* Centra verticalmente */
     justify-content: center; /* Centra orizzontalmente */
