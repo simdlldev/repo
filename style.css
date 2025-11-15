@@ -306,3 +306,20 @@ code {
   padding: 3px 3px;
   border-radius: 10px;
 }
+
+/* --- Stili per il pulsante Back to Top --- */
+#back-to-top {
+    z-index: 40;
+    transform: translateY(100px); /* Inizia fuori schermo */
+    width: 64px; /* Larghezza esplicita per renderlo quadrato */
+    height: 64px; /* Altezza esplicita per renderlo quadrato */
+    display: flex; /* Usa flexbox per centrare l'icona */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra orizzontalmente */
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Entra in vista */
+}

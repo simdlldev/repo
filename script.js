@@ -521,4 +521,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Gestione Back to Top Button ---
+    const backToTopButton = document.getElementById('back-to-top');
+
+    if (backToTopButton) {
+        // Mostra o nasconde il pulsante in base allo scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150) { // Mostra il pulsante dopo 150px di scroll
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Scorri in cima alla pagina al click
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Animazione di scorrimento fluida
+            });
+        });
+    }
 });
